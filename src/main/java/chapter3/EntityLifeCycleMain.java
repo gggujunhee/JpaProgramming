@@ -1,13 +1,13 @@
-package chapter2;
+package chapter3;
+
+import chapter2.Member;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
-public class JpaMain {
-
+public class EntityLifeCycleMain {
     public static void main(String[] args) {
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("jpaprogramming");
@@ -21,7 +21,7 @@ public class JpaMain {
             logic(em);
             tx.commit();
         } catch (Exception e) {
-            System.out.println("jjh-error" + e.toString());
+            System.out.println("error! : " + e.toString());
             tx.rollback();
         } finally {
             em.close();
@@ -30,24 +30,23 @@ public class JpaMain {
     }
 
     private static void logic(EntityManager em) {
+
+        //비영속
         String id = "id1";
         Member member = new Member();
         member.setId(id);
         member.setUserName("junhee");
         member.setAge(2);
 
+        //영속
+        //em.find() 나 JPQL을 사용해서 조회한 엔티티도 영속상태로 됨
         em.persist(member);
 
-        member.setAge(28);
+        //준영속 - 영속성 컨텍스트에서 해당 엔티티를 지워버림
+        // em.close() 나 em.clear() 하면 영속성 컨텍스트 안의 모든 엔티티들이 준영속 상태로 됨
+        em.detach(member);
 
-        Member findMember = em.find(Member.class, id);
-        System.out.println("findMember=" + findMember.getUserName() + ", age=" + findMember.getAge());
-
-        List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
-
-        System.out.println("members.size=" + members.size());
-        System.out.println(members);
-
-        em.remove(findMember);
+        //삭제
+        em.remove(member);
     }
 }
