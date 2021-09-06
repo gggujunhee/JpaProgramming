@@ -3,8 +3,8 @@
              version="2.1">
     <persistence-unit name="jpaprogramming">
         <!-- <class>chapter2.Member</class> -->
-        <class>chapter5.Member</class>
-        <class>chapter5.Team</class>
+        <class>chapter6.ManyToManyOneWayDirection.Member</class>
+        <class>chapter6.ManyToManyOneWayDirection.Product</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
