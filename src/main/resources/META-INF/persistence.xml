@@ -3,8 +3,9 @@
              version="2.1">
     <persistence-unit name="jpaprogramming">
         <!-- <class>chapter2.Member</class> -->
-        <class>chapter6.ManyToManyOneWayDirection.Member</class>
-        <class>chapter6.ManyToManyOneWayDirection.Product</class>
+        <class>chapter6.OneToManyAndManyToOne.Member</class>
+        <class>chapter6.OneToManyAndManyToOne.MemberProduct</class>
+        <class>chapter6.OneToManyAndManyToOne.Product</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
