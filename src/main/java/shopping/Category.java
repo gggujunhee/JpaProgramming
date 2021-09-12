@@ -1,11 +1,13 @@
 package shopping;
 
+import shopping.item.Item;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Category {
+public class Category extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -31,12 +33,12 @@ public class Category {
         this.parent = parent;
     }
 
-    public void addChildCategory(Category child){
+    public void addChildCategory(Category child) {
         this.child.add(child);
         child.setParent(this);
     }
 
-    public void addItem(Item item){
+    public void addItem(Item item) {
         items.add(item);
     }
 }
